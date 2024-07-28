@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            </div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Image">
+                <p class="name">MAVENCO</p>
+                <p class="role">Admin</p>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li class="active"><a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='icons/home-svgrepo-com.svg') }}" alt="Dashboard Icon"> Dashboard</a></li>
+                    <li><a href="{{ url_for('members') }}"><img src="{{ url_for('static', filename='icons/group-svgrepo-com.svg') }}" alt="Members Icon"> Members</a></li>
+                    <li><a href="{{ url_for('settings') }}"><img src="{{ url_for('static', filename='icons/settings-svgrepo-com.svg') }}" alt="Settings Icon"> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                <a href="#">Logout <img src="{{ url_for('static', filename='icons/logout-svgrepo-com.svg') }}" alt="Logout Icon"></a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <h1 class="page-headings">SUBSCRIPTION PLAN</h1>
+            <div class="plans">
+                <div class="plan">
+                    <h2>BASIC</h2>
+                    <p class="price">₱799 per month</p>
+                    <hr>
+                    <p>✔️ 30 Borrower Evaluations</p>
+                    <p>✔️ 50 Add-on Members</p>
+                    <button>SUBSCRIBE</button>
+                </div>
+                <div class="plan">
+                    <h2>STANDARD</h2>
+                    <p class="price">₱1999 per month</p>
+                    <hr>
+                    <p>✔️ 150 Borrower Evaluations</p>
+                    <p>✔️ 200 Add-on Members</p>
+                    <button>SUBSCRIBE</button>
+                </div>
+                <div class="plan">
+                    <h2>PREMIUM</h2>
+                    <p class="price">₱3099 per month</p>
+                    <hr>
+                    <p>✔️ UNLI Borrower Evaluations</p>
+                    <p>✔️ UNLI Add-on Members</p>
+                    <button>SUBSCRIBE</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{{ 
+                    url_for('static', filename='images/logo.png') 
+                }}" 
+                alt="CrediSync Logo">
+            </div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Picture">
+                <div class="name">MAVENCO</div>
+                <div class="role">Admin</div>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='icons/home-svgrepo-com.svg') }}" alt="Dashboard Icon"> Dashboard</a></li>
+                    <li class="active"><a href="{{ url_for('members') }}"><img src="{{ url_for('static', filename='icons/group-svgrepo-com.svg') }}" alt="Members Icon"> Members</a></li>
+                    <li><a href="{{ url_for('settings') }}"><img src="{{ url_for('static', filename='icons/settings-svgrepo-com.svg') }}" alt="Settings Icon"> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                <a href="#"><img src="{{ url_for('static', filename='icons/logout-svgrepo-com.svg') }}" alt="Logout Icon"> Logout</a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <h1>Members</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <button id="searchBtn">Search</button>
+                </div>     
+            </div>
+            <button id="addMemberBtn">Add Member</button><br>
+            <hr>
+            <br>
+            <table class="members-table">
+                <thead>
+                    <tr>
+                        <th>Membership ID</th>
+                        <th>Name</th>
+                        <th>Contact Number</th>
+                        <th>Address</th>
+                        <th>Date Applied</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>24182367</td>
+                        <td>Rae Collins</td>
+                        <td>095696871254</td>
+                        <td>Cebu City</td>
+                        <td>01-10-2023</td>
+                        <td class="actions">
+                            <button class="approve">Approve</button>
+                            <button class="decline">Decline</button>
+                            <button class="evaluate">Evaluate</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>24182367</td>
+                        <td>Rae Collins</td>
+                        <td>095696871254</td>
+                        <td>Cebu City</td>
+                        <td>01-10-2023</td>
+                        <td class="actions">
+                            <button class="approve">Approve</button>
+                            <button class="decline">Decline</button>
+                            <button class="evaluate">Evaluate</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+
+    <!-- Add New Member Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form>
+                <input type="text" name="membership_id" placeholder="Membership ID" required>
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="text" name="contact_number" placeholder="Contact Number" required>
+                <input type="text" name="address" placeholder="Address" required>
+                <input type="date" name="date_applied" placeholder="Date Applied" required>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the button that opens the modal
+        var btn = document.getElementById("addMemberBtn");
+        var search = document.getElementById("searchBtn");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        search.onclick = function() {
+            alert('test only!');
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
