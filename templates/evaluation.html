@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CrediSync Logo">
+            </div>
+            <div class="profile">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Picture">
+                <div class="name">Karthi Madesh</div>
+                <div class="role">Admin</div>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='icons/home-svgrepo-com.svg') }}" alt="Dashboard Icon"> Dashboard</a></li>
+                    <li class="active"><a href="{{ url_for('members') }}"><img src="{{ url_for('static', filename='icons/group-svgrepo-com.svg') }}" alt="Members Icon"> Members</a></li>
+                    <li><a href="{{ url_for('settings') }}"><img src="{{ url_for('static', filename='icons/settings-svgrepo-com.svg') }}" alt="Settings Icon"> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                <a href="#"><img src="{{ url_for('static', filename='icons/logout-svgrepo-com.svg') }}" alt="Logout Icon"> Logout</a>
+            </div>
+        </div>
+        <div class="main-content">
+            <h1>Member Evaluation</h1>
+            <form class="evaluation-form">
+                <div class="form-group">
+                    <label>Dependents</label>
+                    <select>
+                        <option>No</option>
+                        <option>Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Currently Employed</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Loan Amount</label>
+                    <input type="text" value="55000">
+                </div>
+                <div class="form-group">
+                    <label>Years Current Residence</label>
+                    <input type="text" value="3">
+                </div>
+                <div class="form-group">
+                    <label>Employment Status</label>
+                    <select>
+                        <option>Regular</option>
+                        <option>Contract</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Loan Term</label>
+                    <input type="text" value="12">
+                </div>
+                <div class="form-group">
+                    <label>Asset Owner</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Years Employed</label>
+                    <input type="text" value="5">
+                </div>
+                <div class="form-group">
+                    <label>Have Co-Maker</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Credit Card Owner</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Monthly Salary</label>
+                    <input type="text" value="40000">
+                </div>
+                <div class="form-group">
+                    <label>Repayment Schedule</label>
+                    <select>
+                        <option>Monthly</option>
+                        <option>Bi-Weekly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Have Savings Account</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Loan Purpose</label>
+                    <select>
+                        <option>Regular</option>
+                        <option>Emergency</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Have Outstanding Debts</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <button type="submit" class="evaluate-btn">Evaluate</button>
+            </form>
+            <div class="evaluation-results">
+                <div class="prediction">
+                    <h2>Prediction</h2>
+                    <p>Rae Collins is eligible for loan</p>
+                </div>
+                <div class="credit-score">
+                    <h2>Credit Score</h2>
+                    <p>500</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -14,5 +14,9 @@ def members():
 def settings():
     return render_template('settings.html')
 
+@app.route('/evaluation')
+def evaluation():
+    return render_template('evaluation.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

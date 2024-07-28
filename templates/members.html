@@ -100,33 +100,42 @@
     </div>
 
     <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-        // Get the button that opens the modal
-        var btn = document.getElementById("addMemberBtn");
-        var search = document.getElementById("searchBtn");
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+        //variables
+        var modal = document.getElementById("myModal"); // Get the modal
+        var btn = document.getElementById("addMemberBtn"); //button that opens the modal
+        var search = document.getElementById("searchBtn"); //search button
+        var span = document.getElementsByClassName("close")[0]; //span element that closes modal
+        
         // When the user clicks the button, open the modal 
         btn.onclick = function() {
             modal.style.display = "block";
         }
-
+        //if user click search button
         search.onclick = function() {
             alert('test only!');
         }
 
-        // When the user clicks on <span> (x), close the modal
+        // <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        //click anywhere outside modal close
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
+        //action buttons
+        document.querySelector('.evaluate').addEventListener('click', function() {
+            window.location.href = '/evaluation';
+        });
+        document.querySelector('.approve').addEventListener('click', function() {
+            alert('approved!');
+        });
+        document.querySelector('.decline').addEventListener('click', function() {
+            alert('declined!');
+        });
     </script>
 
 </body>
