@@ -53,31 +53,8 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>24182367</td>
-                        <td>Rae Collins</td>
-                        <td>095696871254</td>
-                        <td>Cebu City</td>
-                        <td>01-10-2023</td>
-                        <td class="actions">
-                            <button class="approve">Approve</button>
-                            <button class="decline">Decline</button>
-                            <button class="evaluate">Evaluate</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>24182367</td>
-                        <td>Rae Collins</td>
-                        <td>095696871254</td>
-                        <td>Cebu City</td>
-                        <td>01-10-2023</td>
-                        <td class="actions">
-                            <button class="approve">Approve</button>
-                            <button class="decline">Decline</button>
-                            <button class="evaluate">Evaluate</button>
-                        </td>
-                    </tr>
+                <tbody id="membersTableBody">
+                    <!-- Dynamic rows will be added here -->
                 </tbody>
             </table>
             
@@ -88,53 +65,93 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form>
+            <form id="memberForm">
                 <input type="text" name="membership_id" placeholder="Membership ID" required>
                 <input type="text" name="name" placeholder="Name" required>
                 <input type="text" name="contact_number" placeholder="Contact Number" required>
                 <input type="text" name="address" placeholder="Address" required>
                 <input type="date" name="date_applied" placeholder="Date Applied" required>
-                <button type="submit">Save</button>
+                <button id="save-member" type="submit">Save</button>
             </form>
         </div>
     </div>
 
     <script>
-        //variables
+        // Variables
         var modal = document.getElementById("myModal"); // Get the modal
-        var btn = document.getElementById("addMemberBtn"); //button that opens the modal
-        var search = document.getElementById("searchBtn"); //search button
-        var span = document.getElementsByClassName("close")[0]; //span element that closes modal
-        
+        var btn = document.getElementById("addMemberBtn"); // Button that opens the modal
+        var search = document.getElementById("searchBtn"); // Search button
+        var span = document.getElementsByClassName("close")[0]; // Span element that closes modal
+        var form = document.getElementById("memberForm"); // Form element
+        var tableBody = document.getElementById("membersTableBody"); // Table body
+
         // When the user clicks the button, open the modal 
         btn.onclick = function() {
             modal.style.display = "block";
         }
-        //if user click search button
+
+        // If user clicks search button
         search.onclick = function() {
             alert('test only!');
         }
 
-        // <span> (x), close the modal
+        // Close the modal when user clicks <span> (x)
         span.onclick = function() {
             modal.style.display = "none";
         }
 
-        //click anywhere outside modal close
+        // Close the modal when user clicks anywhere outside the modal
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-        //action buttons
-        document.querySelector('.evaluate').addEventListener('click', function() {
-            window.location.href = '/evaluation';
-        });
-        document.querySelector('.approve').addEventListener('click', function() {
-            alert('approved!');
-        });
-        document.querySelector('.decline').addEventListener('click', function() {
-            alert('declined!');
+
+        // Handle form submission to add new member
+        form.onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            var membershipId = form.membership_id.value;
+            var name = form.name.value;
+            var contactNumber = form.contact_number.value;
+            var address = form.address.value;
+            var dateApplied = form.date_applied.value;
+
+            // Create a new row and append to the table body
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${membershipId}</td>
+                <td>${name}</td>
+                <td>${contactNumber}</td>
+                <td>${address}</td>
+                <td>${dateApplied}</td>
+                <td class="actions">
+                    <button class="approve">Approve</button>
+                    <button class="decline">Decline</button>
+                    <button class="evaluate">Evaluate</button>
+                </td>
+            `;
+
+            // Append the new row to the table body
+            tableBody.appendChild(newRow);
+
+            // Close the modal
+            modal.style.display = "none";
+
+            // Reset the form
+            form.reset();
+        }
+
+        // Delegate action buttons event handling to the table body
+        tableBody.addEventListener('click', function(event) {
+            if (event.target.classList.contains('approve')) {
+                alert('approved!');
+            } else if (event.target.classList.contains('decline')) {
+                alert('declined!');
+            } else if (event.target.classList.contains('evaluate')) {
+                window.location.href = '/evaluation';
+            }
         });
     </script>
 

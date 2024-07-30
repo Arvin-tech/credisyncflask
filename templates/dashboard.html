@@ -37,7 +37,7 @@
                     <hr>
                     <p>✔️ 30 Borrower Evaluations</p>
                     <p>✔️ 50 Add-on Members</p>
-                    <button>SUBSCRIBE</button>
+                    <button class="subscribe-button">SUBSCRIBE</button>
                 </div>
                 <div class="plan">
                     <h2>STANDARD</h2>
@@ -45,7 +45,7 @@
                     <hr>
                     <p>✔️ 150 Borrower Evaluations</p>
                     <p>✔️ 200 Add-on Members</p>
-                    <button>SUBSCRIBE</button>
+                    <button class="subscribe-button">SUBSCRIBE</button>
                 </div>
                 <div class="plan">
                     <h2>PREMIUM</h2>
@@ -53,7 +53,7 @@
                     <hr>
                     <p>✔️ UNLI Borrower Evaluations</p>
                     <p>✔️ UNLI Add-on Members</p>
-                    <button>SUBSCRIBE</button>
+                    <button class="subscribe-button">SUBSCRIBE</button>
                 </div>
             </div>
             <br><br><hr> <!--after this line we may insert other interfaces for dashboard-->
@@ -61,3 +61,12 @@
     </div>
 </body>
 </html>
+
+<script>
+    var buttons = document.getElementsByClassName('subscribe-button');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = function() {
+            window.open('https://www.youtube.com/watch?v=J1Ip2sC_lss', '_blank');
+        }
+    }
+    </script>
