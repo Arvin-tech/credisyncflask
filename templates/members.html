@@ -47,6 +47,7 @@
                     <tr>
                         <th>Membership ID</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Contact Number</th>
                         <th>Address</th>
                         <th>Date Applied</th>
@@ -68,6 +69,7 @@
             <form id="memberForm">
                 <input type="text" name="membership_id" placeholder="Membership ID" required>
                 <input type="text" name="name" placeholder="Name" required>
+                <input type="text" name="email" placeholder="Email address" required>
                 <input type="text" name="contact_number" placeholder="Contact Number" required>
                 <input type="text" name="address" placeholder="Address" required>
                 <input type="date" name="date_applied" placeholder="Date Applied" required>
@@ -114,6 +116,7 @@
             // Get form data
             var membershipId = form.membership_id.value;
             var name = form.name.value;
+            var email = form.email.value;
             var contactNumber = form.contact_number.value;
             var address = form.address.value;
             var dateApplied = form.date_applied.value;
@@ -123,6 +126,7 @@
             newRow.innerHTML = `
                 <td>${membershipId}</td>
                 <td>${name}</td>
+                <td>${email}</td>
                 <td>${contactNumber}</td>
                 <td>${address}</td>
                 <td>${dateApplied}</td>
@@ -146,8 +150,36 @@
         // Delegate action buttons event handling to the table body
         tableBody.addEventListener('click', function(event) {
             if (event.target.classList.contains('approve')) {
-                alert('approved!');
+                const row = event.target.closest('tr'); 
+                const email = row.children[2].textContent; // Get the email from the third column
+        
+                // Send notification email
+                fetch('/send_approval_email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ recipient: email }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(`Approved! Email sent to: ${email}`);
+                    } else {
+                        alert('Error: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending email:', error);
+                    alert('Failed to send email.');
+                });
+
             } else if (event.target.classList.contains('decline')) {
+                alert('declined!');
+            } else if (event.target.classList.contains('evaluate')) {
+                window.location.href = '/evaluation';
+            }
+            else if (event.target.classList.contains('decline')) {
                 alert('declined!');
             } else if (event.target.classList.contains('evaluate')) {
                 window.location.href = '/evaluation';

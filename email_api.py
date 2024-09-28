@@ -1,6 +1,6 @@
 # import sa email api
 from flask_mail import Mail, Message
-from flask import Flask
+from flask import Flask, Blueprint, request, jsonify
 
 #get the variables from .env file
 from dotenv import load_dotenv
@@ -8,6 +8,9 @@ import os
 
 #load them in this file
 load_dotenv()
+
+# Create a Blueprint
+email_blueprint = Blueprint('email_api', __name__)
 
 # declare og variables para sa email api (values from env)
 EMAIL_SERVER_NI_SHA = os.getenv("MAIL_SERVER")
@@ -36,3 +39,14 @@ def send_approval_email(recipient):
     msg = Message(subject, recipients=[recipient])
     msg.body = body
     mail.send(msg)
+
+@email_blueprint.route('/send_approval_email', methods=['POST'])
+def send_approval_email_route():
+    recipient = request.json.get('recipient')
+    if recipient:
+        try:
+            send_approval_email(recipient)
+            return jsonify({"message": "Email sent successfully!"}), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+    return jsonify({"error": "Recipient not provided."}), 400
