@@ -23,5 +23,9 @@ def settings():
 def evaluation():
     return render_template('evaluation.html')
 
+@app.route('/404')
+def page_notfound():
+    return render_template('notfound.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
