@@ -131,7 +131,7 @@
                 <td>${address}</td>
                 <td>${dateApplied}</td>
                 <td class="actions">
-                    <button class="approve">Approve</button>
+                    <button class="approve" data-email="${email}">Approve</button>
                     <button class="decline">Decline</button>
                     <button class="evaluate">Evaluate</button>
                 </td>
@@ -150,8 +150,9 @@
         // Delegate action buttons event handling to the table body
         tableBody.addEventListener('click', function(event) {
             if (event.target.classList.contains('approve')) {
-                const row = event.target.closest('tr'); 
-                const email = row.children[2].textContent; // Get the email from the third column
+                //const row = event.target.closest('tr'); 
+                //const email = row.children[2].textContent;
+                const email = event.target.getAttribute('data-email');
         
                 // Send notification email
                 fetch('/send_approval_email', {
@@ -175,11 +176,6 @@
                 });
 
             } else if (event.target.classList.contains('decline')) {
-                alert('declined!');
-            } else if (event.target.classList.contains('evaluate')) {
-                window.location.href = '/evaluation';
-            }
-            else if (event.target.classList.contains('decline')) {
                 alert('declined!');
             } else if (event.target.classList.contains('evaluate')) {
                 window.location.href = '/evaluation';

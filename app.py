@@ -30,19 +30,23 @@ app.config.update(
 mail = Mail(app)
 
 @app.route('/send_approval_email', methods=['POST'])
-def send_approval_email(recipient):
-    subject = "Approval Notification"
-    message = "Your request has been approved!"
-    
-    text = f"Subject: {subject}\n\n{message}"
+def send_approval_email_route():
+    recipient = request.json.get('recipient')  # Extract the recipient from the request
+    if recipient:
+        subject = "Approval Notification"
+        message = "Your request has been approved!"
+        
+        text = f"Subject: {subject}\n\n{message}"
 
-    try:
-        with smtplib.SMTP(EMAIL_SERVER, EMAIL_PORT) as server:
-            server.starttls()
-            server.login(EMAIL_USERNAME, EMAIL_PASSWORD)
-            server.sendmail(EMAIL_USERNAME, recipient, text)
-    except Exception as e:
-        raise e  
+        try:
+            with smtplib.SMTP(EMAIL_SERVER, EMAIL_PORT) as server:
+                server.starttls()
+                server.login(EMAIL_USERNAME, EMAIL_PASSWORD)
+                server.sendmail(EMAIL_USERNAME, recipient, text)
+            return jsonify({"message": "Email sent successfully!"}), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+    return jsonify({"error": "Recipient not provided."}), 400
 
 @app.route('/')
 def dashboard():
