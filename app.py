@@ -37,7 +37,7 @@ def send_approval_email(recipient):
     text = f"Subject: {subject}\n\n{message}"
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        with smtplib.SMTP(EMAIL_SERVER, EMAIL_PORT) as server:
             server.starttls()
             server.login(EMAIL_USERNAME, EMAIL_PASSWORD)
             server.sendmail(EMAIL_USERNAME, recipient, text)
