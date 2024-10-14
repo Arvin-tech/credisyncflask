@@ -25,7 +25,7 @@ email = input("Sender: ")
 receiver = input("Receiver: ")
 
 # Email subject
-subject = 'LUNES NAPOD UGMA OK PATA ANI???'
+subject = 'Credisync - Loan Application Approved'
 
 # Get the path to the email.html file
 html_file_path = os.path.join('templates', 'email.html')

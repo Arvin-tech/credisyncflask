@@ -3,6 +3,8 @@ from flask_mail import Mail
 from dotenv import load_dotenv
 import os
 import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # Load environment variables
 load_dotenv()
@@ -33,16 +35,35 @@ mail = Mail(app)
 def send_approval_email_route():
     recipient = request.json.get('recipient')  # Extract the recipient from the request
     if recipient:
-        subject = "Approval Notification"
-        message = "Your request has been approved!"
+        subject = "Credisync - Loan Application Approved"
+        # message = "Your request has been approved!"
+
+         # Get the path to the email.html file
+        html_file_path = os.path.join('templates', 'email.html')
+
+        # Read the HTML content
+        try:
+            with open(html_file_path, 'r') as file:
+                html_content = file.read()
+        except Exception as e:
+            return jsonify({"error": f"Failed to read email template: {str(e)}"}), 500
+
+        # Create the email
+        msg = MIMEMultipart()
+        msg['From'] = EMAIL_USERNAME
+        msg['To'] = recipient
+        msg['Subject'] = subject
+
+        # Attach the HTML content to the email
+        msg.attach(MIMEText(html_content, 'html'))
         
-        text = f"Subject: {subject}\n\n{message}"
+        # text = f"Subject: {subject}\n\n{message}"
 
         try:
             with smtplib.SMTP(EMAIL_SERVER, EMAIL_PORT) as server:
                 server.starttls()
                 server.login(EMAIL_USERNAME, EMAIL_PASSWORD)
-                server.sendmail(EMAIL_USERNAME, recipient, text)
+                server.sendmail(EMAIL_USERNAME, recipient, msg.as_string())
             return jsonify({"message": "Email sent successfully!"}), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
