@@ -85,9 +85,9 @@ def settings():
 def evaluation():
     return render_template('evaluation.html')
 
-@app.route('/404')
-def page_notfound():
-    return render_template('notfound.html')
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('notfound.html'), 404
 
 # @app.route('/send_approval_email', methods=['POST'])
 # def send_approval_email_route():
